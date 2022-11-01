@@ -1,6 +1,8 @@
 const DB = require("../../config/db");
 const COLLECTION = "posts";
 
+const objectId = require("mongodb").ObjectId;
+
 module.exports = {
   getPosts: async (req, res) => {
     let db = DB.getDB();
@@ -11,7 +13,7 @@ module.exports = {
           sort: [["createdAt", "desc"]],
         }
       )
-      .project({ _id: 0, createdAt: 0 })
+      .project({ createdAt: 0, updatedAt: 0 })
       .skip(Number(req.params.offset))
       .limit(Number(req.params.limit))
       .toArray((error, result) => {
