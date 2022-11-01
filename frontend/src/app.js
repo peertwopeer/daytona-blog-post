@@ -44,29 +44,28 @@ export default function App(props) {
   const [postsCount, setPostsTotalCount] = useState(0);
   const [selectedBlogId, setSelectedBlogId] = useState(null);
 
+  const getPosts = async () => {
+    setLoading(true);
+
+    const result = await fetchPosts(PAGE_LIMIT, offset);
+    if (result.err) return window.alert(result.err);
+
+    setPosts(await result.json());
+    setLoading(false);
+  };
+  const getPostsCount = async () => {
+    const result = await fetchPostsCount();
+    if (result.err) return window.alert(result.err);
+
+    setPostsTotalCount(await result.json());
+  };
+
   useEffect(() => {
-    showCreateForm(props.createView);
-    if (props.createView || enableUpdate) return;
-
-    const getPosts = async () => {
-      setLoading(true);
-
-      const result = await fetchPosts(PAGE_LIMIT, offset);
-      if (result.err) return window.alert(result.err);
-
-      setPosts(await result.json());
-      setLoading(false);
-    };
-    const getPostsCount = async () => {
-      const result = await fetchPostsCount();
-      if (result.err) return window.alert(result.err);
-
-      setPostsTotalCount(await result.json());
-    };
+    if (enableCreate || enableUpdate) return;
 
     getPosts();
     getPostsCount();
-  }, [offset, props.createView, enableUpdate]);
+  }, [offset, enableCreate, enableUpdate]);
 
   const postList = () =>
     posts.map((post) => (
