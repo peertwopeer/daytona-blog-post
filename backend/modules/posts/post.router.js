@@ -13,7 +13,7 @@ router.get(
 );
 router.post("/add-post", verifyAuthentication, controller.addPost);
 router.get("/post-count", verifyAuthentication, controller.postCount);
-router.post("/update-post/:id", verifyAuthentication, controller.updatePost);
+router.post("/update-post", verifyAuthentication, controller.updatePost);
 router.delete("/delete-post/:id", verifyAuthentication, controller.deletePost);
 
 module.exports = router;

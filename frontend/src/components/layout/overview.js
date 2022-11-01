@@ -3,11 +3,7 @@ import CreatePost from "../post/createPost";
 import EditPost from "../post/editPost";
 import Loader from "../layout/loader";
 
-import {
-  fetchPosts,
-  fetchPostsCount,
-  removePost,
-} from "../../api/posts/handlers";
+import { fetchPosts, fetchPostsCount, removePost } from "../../api/handlers";
 
 const pageLimit = 5;
 const Blog = (props) => (

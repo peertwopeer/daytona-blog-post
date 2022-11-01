@@ -8,6 +8,29 @@ const headers = {
   "x-access-token": ACCESS_TOKEN,
 };
 
+export {
+  findPost,
+  fetchPosts,
+  createPost,
+  removePost,
+  updatePost,
+  fetchPostsCount,
+};
+
+function findPost(postId) {
+  return new Promise(async (resolve, reject) => {
+    await fetch(`${BASE_URL + url.FETCH_POST_BY_ID}/${postId}`, {
+      method: "GET",
+      headers,
+    })
+      .then((result) => {
+        resolve(result);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
 function fetchPosts(pageLimit, offset) {
   return new Promise(async (resolve, reject) => {
     await fetch(`${BASE_URL + url.FETCH_POSTS}/${pageLimit}/${offset}`, {
@@ -50,11 +73,12 @@ function removePost(postId) {
       });
   });
 }
-function findPost(postId) {
+function createPost(payload) {
   return new Promise(async (resolve, reject) => {
-    await fetch(`${BASE_URL + url.FETCH_POST_BY_ID}/${postId}`, {
-      method: "GET",
+    await fetch(BASE_URL + url.ADD_POST, {
       headers,
+      method: "POST",
+      body: JSON.stringify(payload),
     })
       .then((result) => {
         resolve(result);
@@ -64,4 +88,18 @@ function findPost(postId) {
       });
   });
 }
-export { fetchPosts, fetchPostsCount, removePost, findPost };
+function updatePost(payload) {
+  return new Promise(async (resolve, reject) => {
+    await fetch(BASE_URL + url.UPDATE_POST, {
+      headers,
+      method: "POST",
+      body: JSON.stringify(payload),
+    })
+      .then((result) => {
+        resolve(result);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}

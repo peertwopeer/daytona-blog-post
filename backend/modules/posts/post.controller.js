@@ -46,7 +46,7 @@ module.exports = {
   },
   updatePost: async (req, res) => {
     let db = DB.getDB();
-    let findQuery = { _id: objectId(req.params.id) };
+    let findQuery = { _id: objectId(req.body.id) };
     let payload = {
       title: req.body.title,
       description: req.body.description,
