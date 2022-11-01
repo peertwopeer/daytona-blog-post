@@ -41,7 +41,7 @@ export default function EditBlog(props) {
             <h5>UPDATE THE BLOG</h5>
             <button
               type="button"
-              class="btn-close modal-close-btn"
+              className="btn-close modal-close-btn"
               onClick={() => props.setEnableUpdate(false)}
             />
           </div>

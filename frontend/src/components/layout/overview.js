@@ -16,7 +16,7 @@ const Blog = (props) => (
       <div>
         <button
           type="button"
-          class="btn btn-warning btn-sm me-2"
+          className="btn btn-warning btn-sm me-2"
           onClick={() => props.deletePost(props.post._id)}
         >
           DELETE BLOG
@@ -24,7 +24,7 @@ const Blog = (props) => (
 
         <button
           type="button"
-          class="btn btn-primary btn-sm"
+          className="btn btn-primary btn-sm"
           onClick={() => props.updatePost(props.post._id)}
         >
           UPDATE BLOG
@@ -104,10 +104,10 @@ export default function BlogList(props) {
   return (
     <>
       {enableCreate || enableUpdate ? (
-        <div class="form_modal fade_in mt-5 p-2 ">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="bg-light">
+        <div className="form_modal fade_in mt-5 p-2 ">
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="bg-light">
                 {enableUpdate ? (
                   <EditPost
                     postId={selectedBlogId}
@@ -124,7 +124,7 @@ export default function BlogList(props) {
       <table className="table table-striped mt-5">
         <tbody>{postList()}</tbody>
       </table>
-      <div class="d-grid gap-2 mb-4">
+      <div className="d-grid gap-2 mb-4">
         {!!postsCount ? (
           <button
             onClick={() => handleOffset()}
