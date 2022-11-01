@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
 import BlogForm from "../../forms/blogForm";
 import Loader from "../layout/loader";
 
@@ -8,17 +7,10 @@ import { createPost } from "../../api/handlers";
 export default function CreateBlog(props) {
   const [isLoading, setLoading] = useState(false);
 
-  const navigate = useNavigate();
-
-  const closeForm = () => {
-    props.showCreateForm(false);
-    navigate("/");
-  };
-
-  const onSubmit = async (payload) => {
+  const handleSubmit = async (payload) => {
     setLoading(true);
     await createPost(payload).catch((e) => window.alert(e));
-    closeForm();
+    props.showCreateForm(false);
   };
 
   return (
@@ -32,10 +24,10 @@ export default function CreateBlog(props) {
             <button
               type="button"
               className="btn-close modal-close-btn"
-              onClick={() => closeForm()}
+              onClick={() => props.showCreateForm(false)}
             />
           </div>
-          <BlogForm submitHandler={onSubmit} />
+          <BlogForm submitHandler={handleSubmit} />
         </div>
       )}
     </>

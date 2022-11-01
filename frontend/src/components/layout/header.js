@@ -1,24 +1,22 @@
-import React from "react";
-
-import "bootstrap/dist/css/bootstrap.css";
-import { NavLink } from "react-router-dom";
-
-export default function Navbar() {
+export default function Navbar(props) {
   return (
     <div className="nav">
       <div className="nav-header">
-        <NavLink to="/">
+        <a href="/">
           <img
             alt="logo"
             className="company-logo"
             src="https://daytonasystems.in/wp-content/themes/daytona/images/logo/logo.svg"
           />
-        </NavLink>
+        </a>
         <div className="nav-title">WELCOME TO BLOGS</div>
       </div>
-      <NavLink className="create-button" to="/create">
+      <button
+        className="btn-dark bg-transparent border-0 text-white"
+        onClick={() => props.showCreateForm(true)}
+      >
         ADD NEW BLOG
-      </NavLink>
+      </button>
     </div>
   );
 }
