@@ -35,7 +35,7 @@ const POST = (props) => (
   </tr>
 );
 
-export default function App(props) {
+export default function App() {
   const [posts, setPosts] = useState([]);
   const [offset, setOffset] = useState(0);
   const [isLoading, setLoading] = useState(true);
@@ -44,15 +44,6 @@ export default function App(props) {
   const [postsCount, setPostsTotalCount] = useState(0);
   const [selectedBlogId, setSelectedBlogId] = useState(null);
 
-  const getPosts = async () => {
-    setLoading(true);
-
-    const result = await fetchPosts(PAGE_LIMIT, offset);
-    if (result.err) return window.alert(result.err);
-
-    setPosts(await result.json());
-    setLoading(false);
-  };
   const getPostsCount = async () => {
     const result = await fetchPostsCount();
     if (result.err) return window.alert(result.err);
@@ -62,7 +53,15 @@ export default function App(props) {
 
   useEffect(() => {
     if (enableCreate || enableUpdate) return;
+    const getPosts = async () => {
+      setLoading(true);
 
+      const result = await fetchPosts(PAGE_LIMIT, offset);
+      if (result.err) return window.alert(result.err);
+
+      setPosts(await result.json());
+      setLoading(false);
+    };
     getPosts();
     getPostsCount();
   }, [offset, enableCreate, enableUpdate]);

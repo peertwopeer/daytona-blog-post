@@ -7,19 +7,20 @@ export default function EditBlog(props) {
   const [isLoading, setLoading] = useState(true);
   const [selectedPost, setSelectedPost] = useState({});
 
+  const fetchPost = async () => {
+    const result = await findPost(props.postId.toString());
+    if (result.err) return window.alert(result.err);
+
+    const post = await result.json();
+    if (!post) return window.alert("Selected post not found");
+
+    setSelectedPost(post);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    const fetchPost = async () => {
-      const result = await findPost(props.postId.toString());
-      if (result.err) return window.alert(result.err);
-
-      const post = await result.json();
-      if (!post) return window.alert("Selected post not found");
-
-      setSelectedPost(post);
-      setLoading(false);
-    };
     fetchPost();
-  }, [props.postId]);
+  });
 
   const onSubmit = async (formData) => {
     setLoading(true);
